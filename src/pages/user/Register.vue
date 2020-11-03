@@ -7,11 +7,11 @@
       </label>
       <label>Twoje hasło:
         <input v-model="password" @input="passwordValidation" type="password">
-        {{errorPassword}}
+        {{ errorPassword }}
       </label>
       <label>Powtórz hasło:
         <input v-model="confirmPassword" @input="passwordSimilarity" type="password">
-        {{errorConfirmPassword}}
+        {{ errorConfirmPassword }}
       </label>
       <button>Zarejestruj</button>
     </div>
@@ -39,29 +39,31 @@ export default {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!re.test(String(this.email).toLowerCase())) {
         this.errorEmail = 'Error email';
+        return false;
       } else {
         this.errorEmail = 'success';
+        return true;
       }
     },
-
-    passwordValidation(){
+    passwordValidation() {
       const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
-      if(!re.test(String(this.password))){
+      if (!re.test(String(this.password))) {
         this.errorPassword = 'Niepoprawne haslo';
-      }else{
+        return false;
+      } else {
         this.errorPassword = 'Poprawne haslo';
+        return true;
       }
     },
-
-    passwordSimilarity(){
-      if(this.password === this.confirmPassword){
+    passwordSimilarity() {
+      if (this.password === this.confirmPassword) {
         this.errorConfirmPassword = 'Haslo poprawne';
-      }else{
+        return true;
+      } else {
         this.errorConfirmPassword = 'Haslo niepoprawne';
+        return false;
       }
     }
-
-
   }
 
 }

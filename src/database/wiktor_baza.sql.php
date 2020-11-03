@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `address` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `street` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `house_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `apartment_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `postcode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(6) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `index_address` (`id`,`user_id`),
-  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+`id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+`street` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`house_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`apartment_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+`postcode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+`city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`user_id` int(6) unsigned DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `user_id` (`user_id`),
+KEY `index_address` (`id`,`user_id`),
+CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,10 +55,10 @@ DROP TABLE IF EXISTS `job`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `job` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `company_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_job` (`id`)
+`id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+`company_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+PRIMARY KEY (`id`),
+KEY `index_job` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -80,14 +80,14 @@ DROP TABLE IF EXISTS `pet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pet` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(6) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`),
-  KEY `index_pet` (`id`,`user_id`),
-  CONSTRAINT `pet_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+`id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`user_id` int(6) unsigned DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `user_id` (`user_id`),
+KEY `index_pet` (`id`,`user_id`),
+CONSTRAINT `pet_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,13 +109,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `birthday` date NOT NULL,
-  `pesel` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_user` (`id`)
+`id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+`name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`birthday` date NOT NULL,
+`pesel` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
+PRIMARY KEY (`id`),
+KEY `index_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,14 +137,14 @@ DROP TABLE IF EXISTS `user_job`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_job` (
-  `user_id` int(6) unsigned NOT NULL,
-  `job_id` int(6) unsigned NOT NULL,
-  PRIMARY KEY (`user_id`,`job_id`),
-  UNIQUE KEY `user_id` (`user_id`,`job_id`),
-  KEY `job_id` (`job_id`),
-  KEY `index_user_job` (`user_id`,`job_id`),
-  CONSTRAINT `user_job_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `user_job_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
+`user_id` int(6) unsigned NOT NULL,
+`job_id` int(6) unsigned NOT NULL,
+PRIMARY KEY (`user_id`,`job_id`),
+UNIQUE KEY `user_id` (`user_id`,`job_id`),
+KEY `job_id` (`job_id`),
+KEY `index_user_job` (`user_id`,`job_id`),
+CONSTRAINT `user_job_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+CONSTRAINT `user_job_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
