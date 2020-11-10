@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="register-form">
+    <form class="register-form">
       <label>Podaj email:
         <input v-model="email" @input="mailValidation" type="email">
         {{ errorEmail }}
@@ -9,8 +9,8 @@
         <input v-model="password" @input="passwordValidation" type="password">
         {{ errorPassword }}
       </label>
-      <button @click="handleLogin">Zaloguj</button>
-    </div>
+      <button @click="handleLogin" v-on:keyup.enter="handleLogin" >Zaloguj</button>
+    </form>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
     },
     passwordValidation() {
       const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
-      if (!re.test(String(this.password))) {
+      if (!re.test(String(this.password)) || (this.password !== PASSWORD)) {
         this.errorPassword = 'Niepoprawne haslo';
         return false;
       } else {
@@ -59,6 +59,7 @@ export default {
       }
     },
     handleLogin(){
+      console.log('ioasjdasdasd')
       if(this.login){
         this.$router.push({ name: 'dashboard' })
       }
