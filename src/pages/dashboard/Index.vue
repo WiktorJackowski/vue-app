@@ -7,7 +7,10 @@
     </div>
     <div class="chat-window">
       <h1>Okno rozmowy</h1>
-      <small>Wyslij</small>
+      <div class="send-box">
+        <input>
+        <button>Wyslij</button>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +55,8 @@ export default {
     text-align: center;
   }
   p{
-    text-align: right;
+    text-align: left;
+    margin-left: 20px;
   }
 }
 
@@ -62,15 +66,23 @@ export default {
   }
 
   float: right;
-  width: 75%;
   position: relative;
   border-top-style: solid;
   width: 79%;
 
-  small{
-    float: right;
-    color: green;
+  .send-box{
+    position: fixed;
+    bottom: 0;
+    display: inline-flex;
+    right: 0;
+    width: 80%;
+
+    input{
+      width: 100%;
+    }
   }
 }
+
+
 
 </style>
