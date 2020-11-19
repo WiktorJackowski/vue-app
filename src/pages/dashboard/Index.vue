@@ -2,8 +2,7 @@
   <div class="container">
     <div class="users">
       <h1>Użytkownicy:</h1>
-      <p>Pierwszy</p>
-      <p>Drugi</p>
+      <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}}</p>
     </div>
     <div class="chat-window">
       <h1>Okno rozmowy</h1>
@@ -16,20 +15,31 @@
 </template>
 
 <script>
+
+import { getUsers } from "@/api";
+
 export default {
   name: 'Dashboard',
   props: {},
   data() {
     return {
+      users: []
     }
   },
   computed:{
 
   },
   mounted() {
-
+    this.loadUsers();
   },
   methods: {
+    async loadUsers() {
+      try {
+        this.users = await getUsers();
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
 }
