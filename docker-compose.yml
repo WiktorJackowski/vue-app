@@ -11,7 +11,7 @@ services:
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
     ports:
-      - "8738:3306"
+      - "8739:3306"
 
   node:
     image: wodby/node:$NODE_TAG
