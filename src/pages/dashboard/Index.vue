@@ -2,7 +2,7 @@
   <div class="container">
     <div class="users">
       <h1>Użytkownicy:</h1>
-      <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}}</p>
+      <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <span v-if="user.id === currentUser.id"> - ZALOGOWANY</span></p>
     </div>
     <div class="chat-window">
       <h1>Okno rozmowy</h1>
@@ -17,6 +17,7 @@
 <script>
 
 import { getUsers } from "@/api";
+import { mapState } from 'vuex';
 
 export default {
   name: 'Dashboard',
@@ -27,7 +28,9 @@ export default {
     }
   },
   computed:{
-
+    ...mapState({
+      currentUser: state => state.auth.user,
+    }),
   },
   mounted() {
     this.loadUsers();

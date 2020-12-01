@@ -9,13 +9,13 @@
         <input v-model="password" @input="passwordValidation" type="password">
         {{ errorPassword }}
       </label>
-      <button @click="handleLogin" v-on:keyup.enter="handleLogin" >Zaloguj</button>
+      <button type="button" @click="handleLogin" v-on:keyup.enter="handleLogin" >Zaloguj</button>
     </form>
   </div>
 </template>
 
 <script>
-const PASSWORD = "Student123";
+import {login} from "@/api";
 
 export default {
   name: 'Login',
@@ -26,12 +26,13 @@ export default {
       password: null,
       errorEmail: null,
       errorPassword: null,
+      processing: false
     }
   },
   computed:{
     // pola obliczeniowe
     login(){
-      return this.mailValidation() && this.passwordValidation() && (PASSWORD === this.password);
+      return this.mailValidation() ;//&& this.passwordValidation();
     }
   },
   mounted() {
@@ -50,7 +51,7 @@ export default {
     },
     passwordValidation() {
       const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
-      if (!re.test(String(this.password)) || (this.password !== PASSWORD)) {
+      if (!re.test(String(this.password))) {
         this.errorPassword = 'Niepoprawne haslo';
         return false;
       } else {
@@ -58,13 +59,23 @@ export default {
         return true;
       }
     },
-    handleLogin(){
-      console.log('ioasjdasdasd')
-      if(this.login){
-        this.$router.push({ name: 'dashboard' })
-      }
+    async handleLogin(){
+      const { email, password, $store, $router } = this;
+        try {
+          this.processing = true;
+
+          const user = await login({ email, password })
+          await $store.dispatch('auth/saveUserDetails', user[0]);
+          $router.push({ name: 'dashboard' })
+        }
+        catch (e) {
+          console.log(e)
+        }
+        finally {
+          this.processing = false;
+        }}
     }
-  }
+
 
 }
 </script>
