@@ -1,11 +1,15 @@
 <template>
   <div class="container">
     <div class="users">
-      <h1>Użytkownicy:</h1>
-      <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <span v-if="user.id === currentUser.id"> - ZALOGOWANY</span></p>
+      <h1>
+      </h1>
+      <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <span v-if="user.id === currentUser.id"> <img src="../../assets/profile.jpg"></span></p>
+      <div class="logout-box">
+        <button>Wyloguj</button>
+      </div>
     </div>
     <div class="chat-window">
-      <h1>Okno rozmowy</h1>
+      <h1></h1>
       <div class="send-box">
         <input>
         <button>Wyslij</button>
@@ -34,6 +38,7 @@ export default {
   },
   mounted() {
     this.loadUsers();
+    console.log(this.currentUser);
   },
   methods: {
     async loadUsers() {
@@ -68,15 +73,27 @@ export default {
     text-align: center;
   }
   p{
+    color: aqua;
     text-align: left;
     margin-left: 20px;
   }
+img{
+  float: left;
+  height: 50px;
+}
+  .logout-box{
+    button {
+      position: fixed;
+      bottom: 0;
+      display: inline-flex;
+      width: 20%;
+      left: 0;
+    }
+  }
+
 }
 
 .chat-window {
-  h1{
-    text-align: center;
-  }
 
   float: right;
   position: relative;
