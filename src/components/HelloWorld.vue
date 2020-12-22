@@ -16,16 +16,28 @@ export default {
     }
   },
   mounted() {
-    this.roundToNext5(2);
+    this.arrayDiff([1,2,2],[2]);
   },
   methods: {
-    roundToNext5(n){
-      while (n%5 != 0){
-        n++;
+    arrayDiff(a, b){
+      let arr = [];
+
+      for(let i = 0; i < a.length; i++){
+        if(!a.includes(b[i])){
+          arr.push(a[i]);
+        }
       }
 
-      console.log(n);
-      return n;
+      // a.map(item => {
+      //   if(item.includes(b)){
+      //     console.log(item);
+      //   }else{
+      //     console.log(b);
+      //   }
+      // })
+
+      console.log(arr);
+
     }
   }
 }

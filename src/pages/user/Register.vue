@@ -23,11 +23,15 @@
       </label>
       <button type="button" @click="registration" v-on:keyup.enter="registration">Zarejestruj</button>
     </div>
+    <HelloWorld>
+    </HelloWorld>
   </div>
 </template>
 
 <script>
 import {register} from "@/api";
+import HelloWorld from "@/components/HelloWorld";
+
 
 export default {
   name: 'Register',
@@ -46,7 +50,11 @@ export default {
       errorConfirmPassword: '',
     }
   },
+  components:{
+    HelloWorld,
+  },
   mounted() {
+
   },
   methods: {
     nameValidation(){
