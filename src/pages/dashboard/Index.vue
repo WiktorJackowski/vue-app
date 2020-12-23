@@ -109,6 +109,32 @@
         <button class="wyslij">Wyślij</button>
       </div>
     </div>
+    <div class="user-details">
+      <div class="user-conversation">
+        <img class="profile-pics" src="@/assets/profile.jpg">
+        <h2>Adam Mickiewicz</h2>
+        <h3>IT status</h3>
+      </div>
+      <div class="calling-menu">
+        <h1 class="chat-img">X <p>Chat</p> </h1>
+        <h1 class="video-chat-img">X <p>Video chat</p> </h1>
+      </div>
+      <div class="favourite-editor">
+        <h5>X View Friends</h5>
+        <h5>X Add to Favourite</h5>
+        <br>
+        <h3>Attachments</h3>
+      </div>
+      <div class="icons">
+        <br>
+        <span>PDF</span>
+        <span>Video</span>
+        <span>MP4</span>
+        <span>Image</span>
+      </div>
+      <div class="sent-photos"></div>
+      <small class="hide-photos">View all</small>
+    </div>
   </div>
 </template>
 
@@ -166,7 +192,7 @@ export default {
   border-right: ridge;
   width: 20%;
   height: 100%;
-  position: fixed;
+  position: relative;
   float: left;
 
   .logged-in-user{
@@ -225,10 +251,10 @@ export default {
 }
 
 .chat-window {
-  float: right;
+  float: left;
   position: relative;
   border-top-style: ridge;
-  width: 79%;
+  width: 54%;
 
   img{
     border-radius: 100%;
@@ -244,7 +270,7 @@ export default {
   }
 
   .header{
-    width: 100%;
+    width: 54%;
     position: fixed;
     background: white;
     top: 0;
@@ -253,7 +279,8 @@ export default {
   .chatting-board{
     width: 100%;
     height: 100%;
-
+    margin-top: 100px;
+    margin-bottom: 100px;
     .received-msg{
       display: inline-block;
       margin-right: 10px;
@@ -301,8 +328,10 @@ export default {
     position: fixed;
     bottom: 0;
     display: inline-flex;
-    right: -21px;
-    width: 80%;
+    right: 25.5%;
+    width: 54%;
+    border: 0;
+    background: white;
 
     .wyslij{
       color: white;
@@ -319,11 +348,64 @@ export default {
     }
 
     input{
-      width: 91%;
+      width: 92%;
       border: 0;
     }
   }
 }
+.user-details{
+  float: right;
+  height: 100%;
+  width: 20%;
+  position: relative;
+
+  .user-conversation{
+    img{
+      border-radius: 100%;
+      width: 50%;
+      margin-top: 25%;
+    }
+  }
+  .calling-menu{
+    height: 17%;
+    .chat-img{
+      float: left;
+      margin-left: 60px;
+      margin-top: 50px;
+      p{
+        font-size: small;
+      }
+    }
+    .video-chat-img{
+      float: right;
+      margin-right: 60px;
+      margin-top: 50px;
+      p{
+        font-size: small;
+      }
+    }
+  }
+  .favourite-editor{
+    text-align: left;
+  }
+  .icons{
+    text-align: center;
+    span{
+      padding: 20px;
+      color: #4d7dfd;
+    }
+  }
+  .sent-photos{
+    margin-top: 35%;
+  }
+  .hide-photos{
+    color: #4d7dfd;
+    border-radius: 25px;
+    border: 2px solid #4d7dfd;
+    padding: 5px;
+  }
+}
+
 
 
 
