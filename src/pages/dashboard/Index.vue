@@ -192,8 +192,8 @@ export default {
   border-right: ridge;
   width: 20%;
   height: 100%;
-  position: relative;
-  float: left;
+  position: fixed;
+  left: 0;
 
   .logged-in-user{
     color: blue;
@@ -274,6 +274,8 @@ export default {
     position: fixed;
     background: white;
     top: 0;
+    z-index: 11111111111;
+    transform: translateX(38%);
   }
 
   .chatting-board{
@@ -281,6 +283,7 @@ export default {
     height: 100%;
     margin-top: 100px;
     margin-bottom: 100px;
+    transform: translateX(38%);
     .received-msg{
       display: inline-block;
       margin-right: 10px;
@@ -357,7 +360,8 @@ export default {
   float: right;
   height: 100%;
   width: 20%;
-  position: relative;
+  position: fixed;
+  right: 0;
 
   .user-conversation{
     img{
