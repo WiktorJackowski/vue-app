@@ -2,15 +2,21 @@
   <div class="container">
     <div class="users">
       <div class="logged-in-user">
-        <img class="profile-pics" src="@/assets/profile.jpg">
         <div class="logged-user-data">
-          <p>Mariusz Pudzian</p>
-          <small>IT status</small>
+          <img class="profile-pics" src="@/assets/profile.jpg">
+          <div class="main-user">
+            <div>
+              <p>Mariusz Pudzian </p>
+              <font-awesome-icon :icon="['fas', 'pencil-alt']" />
+            </div>
+            <br>
+            <small>IT status</small>
+          </div>
         </div>
       </div>
       <br>
       <br>
-        <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">Received data msg</small><br><small>Last message</small>
+        <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">10:26 AM</small><br><small>I am refer to the project structure and found some mistakes.</small>
         </p>
     </div>
     <div class="chat-window">
@@ -105,8 +111,8 @@
         </div>
       </div>
       <div class="send-box">
-        <input placeholder="Write something">
-        <button class="wyslij">Wyślij</button>
+        <input  placeholder="Write something">
+        <font-awesome-icon :icon="['far', 'arrow-alt-circle-right']" />
       </div>
     </div>
     <div class="user-details">
@@ -116,12 +122,12 @@
         <h3>IT status</h3>
       </div>
       <div class="calling-menu">
-        <h1 class="chat-img">X <p>Chat</p> </h1>
-        <h1 class="video-chat-img">X <p>Video chat</p> </h1>
+        <h1 class="chat-img"> <font-awesome-icon :icon="['fas', 'envelope']" /> <p>Chat</p> </h1>
+        <h1 class="video-chat-img"> <font-awesome-icon :icon="['fas', 'camera']" /> <p>Video chat</p> </h1>
       </div>
       <div class="favourite-editor">
-        <h5>X View Friends</h5>
-        <h5>X Add to Favourite</h5>
+        <h5><font-awesome-icon :icon="['fas', 'user']" /> View Friends</h5>
+        <h5> <font-awesome-icon :icon="['far', 'heart']" /> Add to Favourite</h5>
         <br>
         <h3>Attachments</h3>
       </div>
@@ -217,6 +223,22 @@ export default {
     .logged-user-data{
       position: relative;
       padding: 1px;
+      width: 100%;
+      display: inline-flex;
+
+      .main-user{
+        width: 100%;
+        div{
+          display: inline-flex;
+          svg{
+            align-self: flex-end;
+            right: 3px;
+            position: absolute;
+            color: darkgrey;
+          }
+        }
+      }
+
       p{
         color: blue;
         font-size: 16px;
@@ -230,7 +252,7 @@ export default {
     text-align: left;
   }
   small{
-    color: black;
+    color: grey;
     line-height: 1.8;
   }
 
@@ -244,7 +266,7 @@ export default {
 
   .date{
     float: right;
-    color: red;
+    color: darkgrey;
     font-size: 70%;
     overflow-wrap: break-word;
   }
@@ -336,18 +358,8 @@ export default {
     border: 0;
     background: white;
 
-    .wyslij{
-      color: white;
-      border: 0;
-      border-radius: 50%;
-      background: #4d7dfd;
-      height: 50px;
-      width: 50px;
-      font-size: 14px;
-      font-weight: 800;
-      text-align: center;
-      margin-left: 5px;
-      margin-right: 5px;
+    svg{
+      font-size: 44px;
     }
 
     input{
