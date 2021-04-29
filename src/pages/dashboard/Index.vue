@@ -154,12 +154,7 @@ export default {
   props: {},
   data() {
     return {
-      users: [
-        {name: 'Adam', surname: 'Mickiewicz'},
-        {name: 'Adam', surname: 'Mickiewicz'},
-        {name: 'Adam', surname: 'Mickiewicz'},
-        {name: 'Adam', surname: 'Mickiewicz'},
-      ]
+      users: []
     }
   },
   computed:{
