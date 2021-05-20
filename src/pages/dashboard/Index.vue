@@ -16,7 +16,7 @@
       </div>
       <br>
       <br>
-        <p v-for="(user, key) in users" :key="key">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">10:26 AM</small><br><small>I am refer to the project structure and found some mistakes.</small>
+        <p v-for="(user, key) in users" :key="key" @click="openChat(user.id, 1, user.name + ' ' + user.surname)">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">10:26 AM</small><br><small>I am refer to the project structure and found some mistakes.</small>
         </p>
     </div>
     <div class="chat-window">
@@ -146,7 +146,7 @@
 
 <script>
 
-import { getUsers } from "@/api";
+import { getUsers, openChat } from "@/api";
 import { mapState } from 'vuex';
 
 export default {
@@ -154,22 +154,29 @@ export default {
   props: {},
   data() {
     return {
-      users: []
+      users: [],
+      chat: null,
     }
   },
-  computed:{
+  computed: {
     ...mapState({
       currentUser: state => state.auth.user,
     }),
   },
   mounted() {
     this.loadUsers();
-    console.log(this.currentUser);
   },
   methods: {
     async loadUsers() {
       try {
         this.users = await getUsers();
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async openChat(userId, currentUser, chatName) {
+      try {
+        this.chat = (await openChat({user_id: userId, current_user_id: currentUser, chat_name: chatName}))[0];
       } catch (e) {
         console.log(e);
       }
@@ -195,6 +202,7 @@ export default {
   height: 100%;
   position: fixed;
   left: 0;
+  z-index: 1111111;
 
   .logged-in-user{
     color: blue;

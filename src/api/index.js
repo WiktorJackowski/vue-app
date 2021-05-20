@@ -14,3 +14,8 @@ export async function register(payload) {
     const {data} = await axios.post(`/users/register`, payload);
     return data;
 }
+
+export async function openChat(payload){
+    const {data} = await axios.post('/chats/open-chat', payload);
+    return data;
+}
