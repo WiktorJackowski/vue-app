@@ -7,10 +7,27 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 
+import {login} from "@/api";
+
 export default {
   name: 'App',
   components: {
     // HelloWorld
+  },
+  mounted() {
+    this.handleLogin();
+  },
+  methods:{
+    async handleLogin(){
+      const{$store} = this;
+      try {
+        const user = await login({ email: 'robert@op.pl' , password: 'student' })
+        await $store.dispatch('auth/saveUserDetails', user[0]);
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
   }
 }
 </script>

@@ -6,7 +6,7 @@
           <img class="profile-pics" src="@/assets/profile.jpg">
           <div class="main-user">
             <div>
-              <p>Mariusz Pudzian </p>
+              <p>{{currentUser.name + ' ' + currentUser.surname}}</p>
               <font-awesome-icon :icon="['fas', 'pencil-alt']" />
             </div>
             <br>
@@ -16,13 +16,13 @@
       </div>
       <br>
       <br>
-        <p v-for="(user, key) in users" :key="key" @click="openChat(user.id, 1, user.name + ' ' + user.surname)">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">10:26 AM</small><br><small>I am refer to the project structure and found some mistakes.</small>
+        <p v-for="(user, key) in users" :key="key" @click="openChat(user.id, currentUser.id, user.name + ' ' + user.surname + ' - ' + currentUser.name + ' ' + currentUser.surname)">{{user.name}} {{user.surname}} <img class="profile-pics" src="@/assets/profile.jpg"> <small class="date">10:26 AM</small><br><small>I am refer to the project structure and found some mistakes.</small>
         </p>
     </div>
-    <div class="chat-window">
+    <div v-if="chat" class="chat-window">
       <div class="header">
         <img class="profile-pics" src="@/assets/profile.jpg">
-        <p>Adam Mickiewicz</p>
+        <p>{{chat.name}}</p>
       </div>
       <div class="chatting-board">
         <div class="received-msg">
@@ -115,7 +115,7 @@
         <font-awesome-icon :icon="['far', 'arrow-alt-circle-right']" />
       </div>
     </div>
-    <div class="user-details">
+    <div v-if="chat" class="user-details">
       <div class="user-conversation">
         <img class="profile-pics" src="@/assets/profile.jpg">
         <h2>Adam Mickiewicz</h2>
@@ -140,6 +140,8 @@
       </div>
       <div class="sent-photos"></div>
       <small class="hide-photos">View all</small>
+    </div>
+    <div v-else>
     </div>
   </div>
 </template>
