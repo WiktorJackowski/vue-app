@@ -19,3 +19,8 @@ export async function openChat(payload){
     const {data} = await axios.post('/chats/open-chat', payload);
     return data;
 }
+
+export async function postMessage(payload){
+    const {data} = await axios.post('/message/post-message', payload)
+    return data;
+}

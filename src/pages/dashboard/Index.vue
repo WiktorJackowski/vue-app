@@ -111,8 +111,8 @@
         </div>
       </div>
       <div class="send-box">
-        <input  placeholder="Write something">
-        <font-awesome-icon :icon="['far', 'arrow-alt-circle-right']" />
+        <input v-model="message" placeholder="Write something" @keydown.enter="postMessage">
+        <font-awesome-icon @click="postMessage" :icon="['far', 'arrow-alt-circle-right']" />
       </div>
     </div>
     <div v-if="chat" class="user-details">
@@ -148,7 +148,7 @@
 
 <script>
 
-import { getUsers, openChat } from "@/api";
+import { getUsers, openChat, postMessage} from "@/api";
 import { mapState } from 'vuex';
 
 export default {
@@ -158,6 +158,8 @@ export default {
     return {
       users: [],
       chat: null,
+      message: null,
+      receiverId: null,
     }
   },
   computed: {
@@ -171,16 +173,26 @@ export default {
   methods: {
     async loadUsers() {
       try {
-        this.users = await getUsers();
+        this.users = (await getUsers()).filter(item => (item.id !== this.currentUser.id));
       } catch (e) {
         console.log(e);
       }
     },
     async openChat(userId, currentUser, chatName) {
       try {
+        this.receiverId = userId;
         this.chat = (await openChat({user_id: userId, current_user_id: currentUser, chat_name: chatName}))[0];
       } catch (e) {
         console.log(e);
+      }
+    },
+    async postMessage(){
+      try {
+        await postMessage({chat_id: this.chat.id, sender_id: this.currentUser.id, receiver_id: this.receiverId, text: this.message});
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.message = '';
       }
     }
   }
